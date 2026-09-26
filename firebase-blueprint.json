@@ -1,0 +1,580 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with university, program, academic year, and study preferences",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID of the student"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name or preferred name",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the student"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar photo URL"
+        },
+        "university": {
+          "type": "string",
+          "description": "University or dental faculty name",
+          "maxLength": 150
+        },
+        "country": {
+          "type": "string",
+          "description": "Country where the student is studying",
+          "maxLength": 100
+        },
+        "program": {
+          "type": "string",
+          "description": "Academic program e.g. BDS, DDS, or Dentistry",
+          "maxLength": 100
+        },
+        "year": {
+          "type": "string",
+          "description": "Current academic year description",
+          "maxLength": 50
+        },
+        "academicYear": {
+          "type": "string",
+          "description": "Year digit (1-6 or Internship)"
+        },
+        "preferredLanguage": {
+          "type": "string",
+          "enum": ["en", "ar"],
+          "description": "Preferred interface language"
+        },
+        "dailyStudyTargetHours": {
+          "type": "number",
+          "description": "Target daily study hours"
+        },
+        "weeklyStudyDays": {
+          "type": "number",
+          "description": "Target study days per week"
+        },
+        "studyStyle": {
+          "type": "string",
+          "description": "Selected study methodology"
+        },
+        "energyPeak": {
+          "type": "string",
+          "description": "Time of day student feels most alert"
+        },
+        "busiestDays": {
+          "type": "array",
+          "description": "List of weekdays with intensive clinic/labs"
+        },
+        "studyTimePreference": {
+          "type": "string",
+          "description": "Preferred study time of day"
+        },
+        "studyChallenges": {
+          "type": "array",
+          "description": "Self-reported study obstacles"
+        },
+        "motivationStyle": {
+          "type": "string",
+          "enum": ["gentle", "balanced", "challenge"],
+          "description": "Tone preference for study reminders"
+        },
+        "onboardingCompleted": {
+          "type": "boolean",
+          "description": "Whether student has completed initial onboarding"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of account creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last profile update"
+        }
+      },
+      "required": ["uid", "name"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Enrolled dental subject",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique course ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner student UID"
+        },
+        "code": {
+          "type": "string",
+          "description": "Course code e.g. DENT-301",
+          "maxLength": 50
+        },
+        "name": {
+          "type": "string",
+          "description": "Course name in English",
+          "maxLength": 100
+        },
+        "nameAr": {
+          "type": "string",
+          "description": "Course name in Arabic",
+          "maxLength": 100
+        },
+        "color": {
+          "type": "string",
+          "description": "Theme color accent"
+        },
+        "progressPercent": {
+          "type": "number",
+          "description": "Syllabus completion percentage"
+        },
+        "nextExamDate": {
+          "type": "string",
+          "description": "Next scheduled exam date"
+        },
+        "nextExamDays": {
+          "type": "number",
+          "description": "Days remaining until next exam"
+        },
+        "lecturesCompleted": {
+          "type": "number",
+          "description": "Count of completed lectures"
+        },
+        "totalLectures": {
+          "type": "number",
+          "description": "Total lectures in syllabus"
+        },
+        "questionsSolved": {
+          "type": "number",
+          "description": "MCQs and clinical questions solved"
+        },
+        "totalQuestions": {
+          "type": "number",
+          "description": "Total available questions"
+        },
+        "confidence": {
+          "type": "string",
+          "description": "Student perceived confidence level"
+        },
+        "weakTopics": {
+          "type": "array",
+          "description": "List of weak topics in English"
+        },
+        "weakTopicsAr": {
+          "type": "array",
+          "description": "List of weak topics in Arabic"
+        },
+        "overview": {
+          "type": "string",
+          "description": "Course synopsis"
+        },
+        "overviewAr": {
+          "type": "string",
+          "description": "Course synopsis in Arabic"
+        },
+        "instructor": {
+          "type": "string",
+          "description": "Instructor or department"
+        },
+        "semester": {
+          "type": "string",
+          "description": "Academic semester"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "archived"],
+          "description": "Course active or archived status"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp"
+        }
+      },
+      "required": ["id", "name"]
+    },
+    "Exam": {
+      "title": "Exam",
+      "description": "Scheduled dental exam or quiz",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique exam ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner student UID"
+        },
+        "courseName": {
+          "type": "string",
+          "description": "Associated course name",
+          "maxLength": 100
+        },
+        "examType": {
+          "type": "string",
+          "description": "Midterm, Final, OSPE, or Quiz"
+        },
+        "examTitle": {
+          "type": "string",
+          "description": "Title of the exam",
+          "maxLength": 100
+        },
+        "examDate": {
+          "type": "string",
+          "description": "ISO date string"
+        },
+        "daysRemaining": {
+          "type": "number",
+          "description": "Days left until exam"
+        },
+        "preparationPercent": {
+          "type": "number",
+          "description": "Preparation percentage (0-100)"
+        },
+        "initialPreparationPercent": {
+          "type": "number",
+          "description": "Initial preparedness baseline"
+        },
+        "targetGrade": {
+          "type": "string",
+          "description": "Target score or letter grade",
+          "maxLength": 20
+        },
+        "topicsRemainingCount": {
+          "type": "number",
+          "description": "Count of remaining revision topics"
+        },
+        "highYieldTopics": {
+          "type": "array",
+          "description": "Key exam recall topics"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["id", "courseName", "examDate"]
+    },
+    "StudyTask": {
+      "title": "StudyTask",
+      "description": "Individual daily study action item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique task ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner student UID"
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Course reference ID"
+        },
+        "courseName": {
+          "type": "string",
+          "description": "Course title",
+          "maxLength": 100
+        },
+        "courseColor": {
+          "type": "string",
+          "description": "Accent color"
+        },
+        "title": {
+          "type": "string",
+          "description": "Task description in English",
+          "maxLength": 150
+        },
+        "titleAr": {
+          "type": "string",
+          "description": "Task description in Arabic",
+          "maxLength": 150
+        },
+        "durationMinutes": {
+          "type": "number",
+          "description": "Estimated study time in minutes"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "in_progress", "completed", "rescheduled"],
+          "description": "Current status"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["lecture", "flashcards", "mcq", "clinical_review"],
+          "description": "Type of study task"
+        },
+        "date": {
+          "type": "string",
+          "description": "Assigned date YYYY-MM-DD"
+        },
+        "completedAt": {
+          "type": "string",
+          "description": "Completion human timestamp"
+        }
+      },
+      "required": ["id", "title", "durationMinutes", "status"]
+    },
+    "Lecture": {
+      "title": "Lecture",
+      "description": "Dental lecture material and smart notes",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique lecture ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner student UID"
+        },
+        "courseId": {
+          "type": "string",
+          "description": "Associated course ID"
+        },
+        "courseName": {
+          "type": "string",
+          "description": "Course title",
+          "maxLength": 100
+        },
+        "title": {
+          "type": "string",
+          "description": "Lecture title in English",
+          "maxLength": 150
+        },
+        "titleAr": {
+          "type": "string",
+          "description": "Lecture title in Arabic",
+          "maxLength": 150
+        },
+        "format": {
+          "type": "string",
+          "enum": ["pdf", "ppt", "notes", "audio"],
+          "description": "Original format"
+        },
+        "dateAdded": {
+          "type": "string",
+          "description": "Date added"
+        },
+        "studyTimeEst": {
+          "type": "string",
+          "description": "Estimated study duration"
+        },
+        "isProcessed": {
+          "type": "boolean",
+          "description": "Whether AI processing is completed"
+        },
+        "highYieldSummary": {
+          "type": "string",
+          "description": "Executive high-yield summary"
+        },
+        "highYieldSummaryAr": {
+          "type": "string",
+          "description": "Executive summary in Arabic"
+        },
+        "mustKnowPoints": {
+          "type": "array",
+          "description": "Core concepts for exams"
+        },
+        "mustKnowPointsAr": {
+          "type": "array",
+          "description": "Core concepts in Arabic"
+        },
+        "likelyExamQuestions": {
+          "type": "array",
+          "description": "Frequent exam question prompts"
+        },
+        "likelyExamQuestionsAr": {
+          "type": "array",
+          "description": "Frequent exam questions in Arabic"
+        },
+        "fullNotes": {
+          "type": "string",
+          "description": "Full lecture notes"
+        }
+      },
+      "required": ["id", "title", "courseName"]
+    },
+    "DailyCheckIn": {
+      "title": "DailyCheckIn",
+      "description": "Daily student energy, focus, and priority log",
+      "type": "object",
+      "properties": {
+        "completedToday": {
+          "type": "boolean",
+          "description": "Whether completed today"
+        },
+        "lastCompletedDate": {
+          "type": "string",
+          "description": "Date key YYYY-MM-DD"
+        },
+        "energy": {
+          "type": "string",
+          "enum": ["high", "okay", "low", "exhausted"],
+          "description": "Energy level"
+        },
+        "focus": {
+          "type": "string",
+          "enum": ["sharp", "average", "distracted", "scattered"],
+          "description": "Focus level"
+        },
+        "timeAvailable": {
+          "type": "string",
+          "enum": ["1h", "2h", "3h", "4h_plus"],
+          "description": "Available study time"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["exam_prep", "lecture_backlog", "deep_understanding", "light_review"],
+          "description": "Primary goal for today"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Submission timestamp"
+        }
+      },
+      "required": ["energy", "focus", "timeAvailable", "priority"]
+    },
+    "Achievement": {
+      "title": "Achievement",
+      "description": "Earned or logged student milestone",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique achievement ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner student UID"
+        },
+        "title": {
+          "type": "string",
+          "description": "Achievement title in English",
+          "maxLength": 150
+        },
+        "titleAr": {
+          "type": "string",
+          "description": "Achievement title in Arabic",
+          "maxLength": 150
+        },
+        "category": {
+          "type": "string",
+          "enum": ["lecture", "exam", "streak", "focus", "custom"],
+          "description": "Milestone category"
+        },
+        "courseName": {
+          "type": "string",
+          "description": "Related course if applicable"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Human readable timestamp"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date YYYY-MM-DD"
+        },
+        "isManual": {
+          "type": "boolean",
+          "description": "Whether logged manually by student"
+        }
+      },
+      "required": ["id", "title", "category"]
+    },
+    "FocusResetDay": {
+      "title": "FocusResetDay",
+      "description": "One day of the 7-day focus recovery program",
+      "type": "object",
+      "properties": {
+        "dayNumber": {
+          "type": "number",
+          "description": "Day index 1 through 7"
+        },
+        "title": {
+          "type": "string",
+          "description": "Day action title in English"
+        },
+        "titleAr": {
+          "type": "string",
+          "description": "Day action title in Arabic"
+        },
+        "description": {
+          "type": "string",
+          "description": "Action instructions"
+        },
+        "descriptionAr": {
+          "type": "string",
+          "description": "Action instructions in Arabic"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether completed"
+        }
+      },
+      "required": ["dayNumber", "completed"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile, academic info, and onboarding status"
+    },
+    "/users/{userId}/courses/{courseId}": {
+      "schema": "Course",
+      "description": "User enrolled dental courses"
+    },
+    "/users/{userId}/exams/{examId}": {
+      "schema": "Exam",
+      "description": "User exams with dates and target grades"
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "StudyTask",
+      "description": "Daily study tasks and adaptive plan"
+    },
+    "/users/{userId}/lectures/{lectureId}": {
+      "schema": "Lecture",
+      "description": "User dental lecture summaries and notes"
+    },
+    "/users/{userId}/checkIns/{dateKey}": {
+      "schema": "DailyCheckIn",
+      "description": "Daily energy, focus, and study calibration"
+    },
+    "/users/{userId}/achievements/{achievementId}": {
+      "schema": "Achievement",
+      "description": "Earned and logged dental study achievements"
+    },
+    "/users/{userId}/focusReset/{dayId}": {
+      "schema": "FocusResetDay",
+      "description": "7-day focus reset progress tracking"
+    },
+    "/users/{userId}/focusSessions/{sessionId}": {
+      "schema": "FocusSessionLog",
+      "description": "Logged focus sessions with actual duration and post-session confidence"
+    },
+    "/users/{userId}/couldntFinish/{logId}": {
+      "schema": "CouldntFinishLog",
+      "description": "Reason logs for unfinished study tasks"
+    },
+    "/users/{userId}/dailyReviews/{reviewId}": {
+      "schema": "DailyReview",
+      "description": "End-of-day study reflections and obstacle tracking"
+    },
+    "/users/{userId}/paceProfile/{docId}": {
+      "schema": "PaceProfile",
+      "description": "Personal moving study pace multiplier"
+    },
+    "/users/{userId}/plans/{planId}": {
+      "schema": "StudyTask",
+      "description": "Persisted daily study plans"
+    }
+  }
+}
